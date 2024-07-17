@@ -14,7 +14,7 @@ const SignupLink = ({ name, setName, nextPanel }) => {
         <div className="mt-[5rem] rounded-xl w-full ">
           <div className="flex items-center w-full">
             <div className="pl-3 py-4 sm:py-3 rounded-l-xl h-full text-[#6c6c6c] text-[16px] sm:text-[14px] leading-5 bg-[#f7f7f7] -mr-[0.625rem] z-[2]">
-              bento.me/
+              mosaic.me/
             </div>
             <div className="w-full">
               <input

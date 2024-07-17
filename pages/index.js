@@ -267,7 +267,7 @@ export default function Home({ data }) {
                 />
                 <div className="flex h-fit xl:hidden rounded-lg mt-2 border shadow-sm  items-center justify-center">
                   <button className="text-[0.87rem] transition-all duration-200 font-bold w-full py-2 px-[10px] hover:bg-[#FBFBFB]">
-                    Share my Bento
+                    Share
                   </button>
                 </div>
               </div>
@@ -355,7 +355,7 @@ export default function Home({ data }) {
       <div className="fixed bottom-[2.5rem]  backdrop-blur-lg  bg-blend-multiply  bg-white/50  left-1/2 -translate-x-1/2 p-3 rounded-2xl flex items-center shadow-xl  ">
         <div className="h-[33px] hidden xl:flex rounded-md w-[127px] bg-green-500 text-white  items-center justify-center">
           <button className="text-[0.87rem] font-bold w-full">
-            Share my Bento
+            Share
           </button>
         </div>
         <div className="mx-4 w-[2px] h-[16px] bg-gray-300 hidden xl:block"></div>

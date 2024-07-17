@@ -21,7 +21,7 @@ const Login = () => {
       <div className="flex max-w-[675px] flex-1 flex-col items-center justify-center ">
         <div className="flex flex-col h-fit max-w-[448px] w-full">
           <h1 className="font-bold text-[32px] leading-[40px] mt-2">
-            Log in to your Bento
+            Log in to your MosaicBox
           </h1>
           <p className="mt-[1rem] font-normal text-[20px] leading-9 text-[#6c6c6c]">
             Good to have you back!

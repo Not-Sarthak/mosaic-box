@@ -19,7 +19,7 @@ export default function SignUpMail({
         className="text-[28px] cursor-pointer text-[#6c6c6c] "
       />
       <p className="mt-[1rem] font-normal text-[16px] text-[#6c6c6c]">
-        <span>bento.me/</span>
+        <span>mosaic.me/</span>
         <span>{name}</span>
         <span> is yours!</span>
       </p>
