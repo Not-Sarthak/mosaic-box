@@ -14,23 +14,157 @@ model User {
   password  String
   createdAt DateTime @default(now())
   blocks    Block[]
+  items     Item[]
   socials   Social[]
 }
 
-model Social {
+model Item {
   id        String   @id @default(uuid())
-  type      String
-  url       String
+  type      ItemType
+  order     Int
+  positionX Int      @default(0)
+  positionY Int      @default(0)
+  width     Int      @default(1)
+  height    Int      @default(1)
   userId    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  blockId   String?
+  socialId  String?
+  block     Block?   @relation(fields: [blockId], references: [id])
+  social    Social?  @relation(fields: [socialId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([blockId])
+  @@index([socialId])
+}
+
+model Social {
+  id           String               @id @default(uuid())
+  url          String
+  userId       String
+  createdAt    DateTime             @default(now())
+  type         SocialType
+  buymeacoffee BuyMeACoffeeProfile?
+  dribbble     DribbbleProfile?
+  github       GitHubProfile?
+  instagram    InstagramProfile?
+  items        Item[]
+  linkedin     LinkedInProfile?
+  user         User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  twitter      TwitterProfile?
+
+  @@index([userId])
+}
+
+model TwitterProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+}
+
+model GitHubProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+}
+
+model LinkedInProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+}
+
+model DribbbleProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+}
+
+model InstagramProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
+}
+
+model BuyMeACoffeeProfile {
+  id       String @id @default(uuid())
+  handle   String
+  socialId String @unique
+  social   Social @relation(fields: [socialId], references: [id], onDelete: Cascade)
 }
 
 model Block {
-  id        String   @id @default(uuid())
-  type      String
-  content   String
-  userId    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  id         String      @id @default(uuid())
+  userId     String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  type       BlockType
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items      Item[]
+  mapBlock   MapBlock?
+  mediaBlock MediaBlock?
+  noteBlock  NoteBlock?
+  titleBlock TitleBlock?
+
+  @@index([userId])
+}
+
+model TitleBlock {
+  id      String @id @default(uuid())
+  content String
+  blockId String @unique
+  block   Block  @relation(fields: [blockId], references: [id], onDelete: Cascade)
+}
+
+model NoteBlock {
+  id      String @id @default(uuid())
+  content String
+  blockId String @unique
+  block   Block  @relation(fields: [blockId], references: [id], onDelete: Cascade)
+}
+
+model MediaBlock {
+  id      String    @id @default(uuid())
+  type    MediaType
+  url     String
+  blockId String    @unique
+  block   Block     @relation(fields: [blockId], references: [id], onDelete: Cascade)
+}
+
+model MapBlock {
+  id       String @id @default(uuid())
+  location String
+  blockId  String @unique
+  block    Block  @relation(fields: [blockId], references: [id], onDelete: Cascade)
+}
+
+enum ItemType {
+  BLOCK
+  SOCIAL
+}
+
+enum SocialType {
+  TWITTER
+  INSTAGRAM
+  GITHUB
+  LINKEDIN
+  DRIBBBLE
+  BUYMEACOFFEE
+}
+
+enum BlockType {
+  TITLE
+  NOTE
+  MEDIA
+  MAP
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }

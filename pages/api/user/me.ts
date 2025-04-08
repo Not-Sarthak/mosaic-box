@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             include: {
                 socials: true,
                 blocks: true,
+                items: true
             },
         });
 
@@ -32,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             name: userData.name,
             socials: userData.socials,
             blocks: userData.blocks,
+            items: userData.items,
         })
     } catch (error) {
         console.error('[GET /me error]', error);
